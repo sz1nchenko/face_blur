@@ -11,3 +11,12 @@ class BoundingBox:
         self.ymin = ymin
         self.xmax = xmax
         self.ymax = ymax
+
+    @classmethod
+    def from_list(cls, array):
+        return BoundingBox(
+            xmin=array[0],
+            ymin=array[1],
+            xmax=array[2],
+            ymax=array[3]
+        )
