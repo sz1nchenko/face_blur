@@ -10,8 +10,8 @@ from face_detection.layers.functions.prior_box import PriorBox
 from face_detection.utils.box_utils import decode, decode_landm
 from face_detection.utils.nms.py_cpu_nms import py_cpu_nms
 from face_detection.config import *
-from helpers.detection import load_model
-from helpers.device_type import DeviceType
+from utils.detection import load_model
+from utils.device_type import DeviceType
 from entities import BoundingBox, FaceLandmarks
 
 
@@ -58,7 +58,7 @@ class FaceDetector:
         scores = scores[inds]
 
         # keep top-K before NMS
-        order = scores.argsort()[::-1][TOP_K]
+        order = scores.argsort()[::-1][:TOP_K]
         boxes = boxes[order]
         landms = landms[order]
         scores = scores[order]
@@ -73,8 +73,8 @@ class FaceDetector:
         dets = dets[:KEEP_TOP_K, :]
         landms = landms[:KEEP_TOP_K, :]
 
-        bboxes = [BoundingBox.from_list(det) for det in dets]
-        face_landmarks = [FaceLandmarks.from_list(l) for l in landms]
+        bboxes = [BoundingBox.from_list(det.astype(int)) for det in dets]
+        face_landmarks = [FaceLandmarks.from_list(l.astype(int)) for l in landms]
 
         return bboxes, face_landmarks
 

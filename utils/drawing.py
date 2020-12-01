@@ -13,10 +13,10 @@ def draw_bbox(image: np.ndarray, bbox: BoundingBox) -> np.ndarray:
 
 def draw_landmarks(image: np.ndarray, landmarks: FaceLandmarks) -> np.ndarray:
     image_copy = np.copy(image)
-    cv2.circle(image_copy, landmarks.left_eye.to_tuple(), 1, (255, 140, 0), 4)
-    cv2.circle(image_copy, landmarks.right_eye.to_tuple(), 1, (255, 140, 0), 4)
-    cv2.circle(image_copy, landmarks.nose.to_tuple(), 1, (255, 140, 0), 4)
-    cv2.circle(image_copy, landmarks.left_mouth_corner.to_tuple(), 1, (255, 140, 0), 4)
-    cv2.circle(image_copy, landmarks.right_mouth_corner.to_tuple(), 1, (255, 140, 0), 4)
+    cv2.circle(image_copy, landmarks.left_eye.to_tuple(), 1, (0, 140, 255), 5)
+    cv2.circle(image_copy, landmarks.right_eye.to_tuple(), 1, (0, 140, 255), 5)
+    cv2.circle(image_copy, landmarks.nose.to_tuple(), 1, (0, 140, 255), 5)
+    cv2.circle(image_copy, landmarks.left_mouth_corner.to_tuple(), 1, (0, 140, 255), 5)
+    cv2.circle(image_copy, landmarks.right_mouth_corner.to_tuple(), 1, (0, 140, 255), 5)
 
     return image_copy

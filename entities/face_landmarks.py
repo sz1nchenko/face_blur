@@ -1,3 +1,5 @@
+import numpy as np
+
 from entities import Point
 
 
@@ -18,7 +20,7 @@ class FaceLandmarks:
         self.right_mouth_corner = right_mouth_corner
 
     @classmethod
-    def from_list(cls, array: int):
+    def from_list(cls, array: np.ndarray):
         return FaceLandmarks(
             left_eye=Point(x=array[0], y=array[1]),
             right_eye=Point(x=array[2], y=array[3]),
