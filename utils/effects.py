@@ -9,7 +9,7 @@ from entities import BoundingBox, FaceLandmarks
 def blur(
         image: np.ndarray,
         bboxes: List[BoundingBox],
-        ksize: Tuple[int, int] = (30, 30)
+        ksize: Tuple[int, int] = (50, 50)
 ) -> np.ndarray:
 
     image_copy = np.copy(image)
@@ -45,8 +45,22 @@ def hide_eyes(
 
     image_copy = np.copy(image)
     for landm in landmarks:
-        xmin, ymin = landm.left_eye.to_tuple()
-        xmax, ymax = landm.right_eye.to_tuple()
-        cv2.rectangle(image_copy, (xmin - 25, ymin - 20), (xmax + 25, ymax + 20), (0, 0, 0), thickness=cv2.FILLED)
+        right_eye = landm.right_eye
+        left_eye = landm.left_eye
+        dist = right_eye.distance(left_eye)
+        x_pad = int(dist * 0.4)
+        y_pad = int(dist * 0.3)
+        p1 = [right_eye.x - x_pad, right_eye.y - y_pad]
+        p2 = [right_eye.x - x_pad, right_eye.y + y_pad]
+        p3 = [left_eye.x + x_pad, left_eye.y - y_pad]
+        p4 = [left_eye.x + x_pad, left_eye.y + y_pad]
+
+        cnt = np.array([p1, p2, p3, p4])
+        rect = cv2.minAreaRect(cnt)
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
+        cv2.drawContours(image_copy, [box], 0, (0, 0, 0), -1)
 
     return image_copy
+
+

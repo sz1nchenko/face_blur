@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class BoundingBox:
 
     def __init__(
