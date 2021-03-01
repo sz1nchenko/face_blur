@@ -9,7 +9,7 @@ from entities import BoundingBox, FaceLandmarks
 def blur(
         image: np.ndarray,
         bboxes: List[BoundingBox],
-        ksize: Tuple[int, int] = (50, 50)
+        ksize: Tuple[int, int] = (30, 30)
 ) -> np.ndarray:
 
     image_copy = np.copy(image)
@@ -24,7 +24,7 @@ def blur(
 def pixelate(
         image: np.ndarray,
         bboxes: List[BoundingBox],
-        size: Tuple[int, int] = (16, 16)
+        size: Tuple[int, int] = (10, 10)
 ) -> np.ndarray:
 
     image_copy = np.copy(image)
