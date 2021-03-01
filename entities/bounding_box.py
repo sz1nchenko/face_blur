@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class BoundingBox:
 
     def __init__(
@@ -13,7 +16,7 @@ class BoundingBox:
         self.ymax = ymax
 
     @classmethod
-    def from_list(cls, array):
+    def from_list(cls, array: np.ndarray):
         return BoundingBox(
             xmin=array[0],
             ymin=array[1],
